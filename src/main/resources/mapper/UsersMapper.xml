@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="data.mapper.UsersMapper">
+
+    <!-- Insert a new user -->
+    <insert id="insertUser" parameterType="data.dto.UsersDto">
+        INSERT INTO Users (username, password, full_name, email, phone_number, address)
+        VALUES (#{username}, #{password}, #{fullName}, #{email}, #{phone_number}, #{address})
+    </insert>
+
+    <!-- Select a user by username and password (login check) -->
+    <select id="getUserByUsername" parameterType="map" resultType="data.dto.UsersDto">
+        SELECT * FROM Users WHERE username = #{username} AND password = #{password}
+    </select>
+    
+    <select id="getUserId" parameterType="int" resultType="data.dto.UsersDto">
+    	SELECT user_id FROM Users WHERE username = #{username}
+    </select>
+</mapper>
+
+

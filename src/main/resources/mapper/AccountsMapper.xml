@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="data.mapper.AccountsMapperInter">
+
+    <!-- Insert a new account -->
+    <insert id="insertAccount" parameterType="data.dto.AccountsDto">
+        INSERT INTO Accounts (user_id, account_number, account_type, balance)
+        VALUES (#{userid}, #{account_number}, #{account_type}, #{balance})
+    </insert>
+
+    <!-- Select account by account ID -->
+    <select id="getAccountById" parameterType="int" resultType="data.dto.AccountsDto">
+        SELECT * FROM Accounts WHERE user_id = #{userid}
+    </select>
+
+    <!-- Select account ID by user ID -->
+    <select id="getAccountId" parameterType="int" resultType="int">
+        SELECT account_id FROM Accounts WHERE user_id = #{userid}
+    </select>
+    
+    <!-- Update account balance -->
+    <update id="updateAccount" parameterType="map">
+        UPDATE Accounts
+        SET balance = #{balance}
+        WHERE user_id = #{userid}
+    </update>
+    
+    <!-- Select account number by account ID -->
+    <select id="getAccountNum" parameterType="int" resultType="String">
+        SELECT account_number FROM Accounts WHERE account_id = #{account_id}
+    </select>
+    
+     <select id="getAccountBalance" parameterType="int" resultType="double">
+        SELECT balance FROM Accounts WHERE account_id = #{account_id}
+    </select>
+    
+</mapper>
